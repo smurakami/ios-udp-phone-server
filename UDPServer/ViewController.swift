@@ -26,6 +26,7 @@ class ViewController: UIViewController, UDPDelegate {
         
         
         let bufferSize = UInt32(16537) // 決め打ち。ここを動的に変更できるようにはしたい。
+//        let bufferSize = UInt32(1024 * 2) // 決め打ち。ここを動的に変更できるようにはしたい。
         outputBuffer = AVAudioPCMBuffer(PCMFormat: player.outputFormatForBus(0), frameCapacity: bufferSize)
         outputBuffer.frameLength = bufferSize
 
@@ -76,7 +77,7 @@ class ViewController: UIViewController, UDPDelegate {
         
         if bufferOffset >= Int(self.outputBuffer.frameLength) {
             print("schedule")
-            self.player.scheduleBuffer(self.outputBuffer, atTime: nil, options: .InterruptsAtLoop, completionHandler: nil)
+            self.player.scheduleBuffer(self.outputBuffer, atTime: nil, options: .Loops, completionHandler: nil)
             
             var index = 0
             while i < count {
