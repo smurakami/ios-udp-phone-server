@@ -19,6 +19,13 @@ class ViewController: UIViewController, UDPDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let session = AVAudioSession.sharedInstance()
+        try! session.setCategory(AVAudioSessionCategoryPlayAndRecord,
+            withOptions: AVAudioSessionCategoryOptions.AllowBluetooth)
+        
+        try! session.setActive(true)
+        
         // Do any additional setup after loading the view, typically from a nib.
         udp.delegate = self
         print(udp.getIPAddress())
